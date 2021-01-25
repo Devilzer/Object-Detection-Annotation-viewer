@@ -2,6 +2,7 @@ const inputImg = document.getElementById("file_input");
 const inputJson = document.getElementById("json_input");
 const button = document.getElementById("submit_btn");
 const imageCardsContainer = document.querySelector(".image-display-container");
+var currentImage = "";
 //
 let files = JSON.parse(localStorage.getItem("files")) || [];
 var image="";
@@ -9,10 +10,21 @@ var json="";
 
 //initial loading and diplaying files
 window.onload = function(){
+    console.log(files);
     renderImageCards(files);
 }
 
+imageCardsContainer.addEventListener("click",(e)=>{
+    let clickedCard = e.target.closest("div").id;
+    if(clickedCard!==""){
+        currentImage = clickedCard;
+        localStorage.setItem("currentImage",JSON.stringify(currentImage));
+        window.open("image_detail.html","_self");
+    }
+    
+});
 
+//imagecard rendering function.
 function renderImageCards(files){
     imageCardsContainer.innerHTML="";
     for(let file of files){
