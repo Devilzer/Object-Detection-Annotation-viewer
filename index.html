@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/home.css">
+    <title>Segmind Assignment</title>
+</head>
+<body>
+    <h1>
+        Object Detection Annotation viewer.
+    </h1>
+    <div class="input-contsiner">
+        <input type="file" name="file_input" class="file-input" id="file_input" accept="image/*"/>
+        <textarea id="json_input" placeholder="Input object predictions in json format..."></textarea>
+        <button id="submit_btn">
+            Submit
+        </button>
+    </div>
+    <div class="image-display-container">
+
+    </div>
+<script src="./scripts/home.js"></script>
+</body>
+</html>
