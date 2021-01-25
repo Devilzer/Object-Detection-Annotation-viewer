@@ -1,10 +1,12 @@
 const inputImg = document.getElementById("file_input");
 const inputJson = document.getElementById("json_input");
 const button = document.getElementById("submit_btn");
-let detections = JSON.parse(localStorage.getItem("detections")) || [];
+//
+let files = JSON.parse(localStorage.getItem("files")) || [];
 var image="";
 var json="";
 
+// function for getting the uploaded img file.
 inputImg.addEventListener("change",()=>{
     try {
         const file = inputImg.files[0];
@@ -12,8 +14,16 @@ inputImg.addEventListener("change",()=>{
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.addEventListener('load',()=>{
-                image = reader.result;
-                console.log(image);
+                var newImg = new Image();
+                newImg.src = reader.result;
+                newImg.addEventListener('load',()=>{
+                    var imgData = {
+                        src : reader.result,
+                        width : newImg.width,
+                        height : newImg.height
+                    };
+                    image = imgData;
+                });
             });
         }
         else{
@@ -25,6 +35,7 @@ inputImg.addEventListener("change",()=>{
     }
 });
 
+//function for getting json from input text area.
 inputJson.addEventListener("change",()=>{
     try {
         const data  = JSON.parse(inputJson.value);
@@ -39,7 +50,7 @@ inputJson.addEventListener("change",()=>{
 });
 
 button.addEventListener("click",()=>{
-    //chaecking whether any field is empty.
+    //checking whether any field is empty.
     if(image==="" || json===""){
         console.log("error in getting data");
     }
@@ -52,8 +63,8 @@ button.addEventListener("click",()=>{
         };
         console.log(object);
         //chaecking for initial empty localstorage
-            detections.push(object);
-            localStorage.setItem("detections",JSON.stringify(detections));
+            files.push(object);
+            localStorage.setItem("files",JSON.stringify(files));
         
         image="";
         json="";
