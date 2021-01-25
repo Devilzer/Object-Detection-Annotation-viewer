@@ -1,10 +1,30 @@
 const inputImg = document.getElementById("file_input");
 const inputJson = document.getElementById("json_input");
 const button = document.getElementById("submit_btn");
+const imageCardsContainer = document.querySelector(".image-display-container");
 //
 let files = JSON.parse(localStorage.getItem("files")) || [];
 var image="";
 var json="";
+
+//initial loading and diplaying files
+window.onload = function(){
+    renderImageCards(files);
+}
+
+
+function renderImageCards(files){
+    imageCardsContainer.innerHTML="";
+    for(let file of files){
+        // console.log(file.image.src);
+        var card = document.createElement("div");
+        card.setAttribute("class","container");
+        card.setAttribute("id",file.id);
+        card.innerHTML=`<img src="${file.image.src}"/>`
+        imageCardsContainer.appendChild(card);
+    }
+}
+
 
 // function for getting the uploaded img file.
 inputImg.addEventListener("change",()=>{
@@ -32,8 +52,10 @@ inputImg.addEventListener("change",()=>{
     } catch (error) {
         image="";
         console.log("error in loading image ",error);
+        return;
     }
 });
+
 
 //function for getting json from input text area.
 inputJson.addEventListener("change",()=>{
@@ -46,13 +68,17 @@ inputJson.addEventListener("change",()=>{
     } catch (error) {
         json="";
         console.log("error while prasing json data",error);
+        return;
     }
 });
 
+
+//input data submission handler
 button.addEventListener("click",()=>{
     //checking whether any field is empty.
     if(image==="" || json===""){
         console.log("error in getting data");
+        return;
     }
     else{
         var id = Date.now();
@@ -63,12 +89,12 @@ button.addEventListener("click",()=>{
         };
         console.log(object);
         //chaecking for initial empty localstorage
-            files.push(object);
-            localStorage.setItem("files",JSON.stringify(files));
-        
+        files.push(object);
+        localStorage.setItem("files",JSON.stringify(files));
         image="";
         json="";
         inputImg.value="";
         inputJson.value="";
+        renderImageCards(files);
     }
 });

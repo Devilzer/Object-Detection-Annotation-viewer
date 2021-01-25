@@ -50,7 +50,7 @@ button:hover {
 }
 .image-display-container {
   margin: auto;
-  margin-top: 15px;
+  margin-top: 25px;
   width: 90%;
   display: flex;
   justify-content: space-evenly;
@@ -58,9 +58,9 @@ button:hover {
   /* background-color: antiquewhite; */
 }
 .container {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   width: 225px;
-  height: 225px;
+  height: 175px;
   box-shadow: 0 0 5px 1px gray;
 }
 .container:hover {
