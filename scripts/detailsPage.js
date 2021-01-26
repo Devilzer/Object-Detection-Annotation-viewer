@@ -18,10 +18,11 @@ window.onload = function() {
 
     //traversing thru detected objects
     for(let object of currentFile.json.objects){
-        const randomColor = Math.floor(Math.random()*16777777).toString(16);
+        //random color for each object
+        const randomColor = Math.floor(Math.random()*16777215).toString(16);
         var path = new Path.Rectangle([(center.x-(currentFile.image.width/2))+object.x,(center.y-(currentFile.image.height/2))+object.y], [object.width,object.height]);
 
-        path.strokeColor="#" + randomColor;
+        path.strokeColor='red';
         path.fillColor = "#" + randomColor;
         path.opacity = .4;
         var element = document.createElement("h3");
@@ -29,5 +30,4 @@ window.onload = function() {
         element.style.color = "#" + randomColor;
         details.appendChild(element);
     }
-    
-}
+};
