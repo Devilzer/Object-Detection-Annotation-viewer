@@ -10,7 +10,7 @@ window.onload = function() {
 
     //getting current image file info from id..
     const currentFile=files.find(file=>file.id==currentId);
-    console.log(currentFile)
+    
     
     //placing image in center
     var raster = new paper.Raster({source:currentFile.image.src,  position: view.center});

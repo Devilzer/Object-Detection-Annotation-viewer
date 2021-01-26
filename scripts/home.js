@@ -10,7 +10,6 @@ var json="";
 
 //initial loading and diplaying files
 window.onload = function(){
-    console.log(files);
     renderImageCards(files);
 }
 
@@ -75,7 +74,6 @@ inputJson.addEventListener("change",()=>{
         const data  = JSON.parse(inputJson.value);
         if(data){
             json = data;
-            console.log(json);
         }
     } catch (error) {
         json="";
@@ -90,6 +88,13 @@ button.addEventListener("click",()=>{
     //checking whether any field is empty.
     if(image==="" || json===""){
         console.log("error in getting data");
+        notie.alert({
+            type: "warning",
+            text: "Error in getting data please check inputs.",
+            stay: false,
+            time: 2, 
+            position: "bottom"
+          });
         return;
     }
     else{
@@ -99,7 +104,7 @@ button.addEventListener("click",()=>{
             image : image,
             json : json
         };
-        console.log(object);
+        
         //chaecking for initial empty localstorage
         files.push(object);
         localStorage.setItem("files",JSON.stringify(files));
@@ -108,5 +113,12 @@ button.addEventListener("click",()=>{
         inputImg.value="";
         inputJson.value="";
         renderImageCards(files);
+        notie.alert({
+            type: "success",
+            text: "Image Added.",
+            stay: false,
+            time: 2, 
+            position: "bottom"
+          });
     }
 });
